@@ -1,0 +1,136 @@
+git switch -c station-upgrade
+
+mkdir results
+
+touch results/summary.md
+echo "Analysis of the first field season." >> results/summary.md
+
+git add results
+git commit -m "Add results directory"
+
+mv data/sensor-readings.csv data/station-data.csv
+
+mkdir scripts/archive
+
+cp scripts/*.py scripts/archive
+
+rm docs/notes.md
+
+git add .
+git commit -m "Update station files"
+
+echo "temp/" > .gitignore
+echo "log?.txt" >> .gitignore
+cat .gitignore 
+
+git add .gitignore && git commit -m "Add gitignore"
+
+touch ./{log1,log2,log3,log4}.txt
+
+git status
+On branch station-upgrade
+nothing to commit, working tree clean
+They do not appear in the log files because they have not been added yet to be staged.
+
+
+cat data/station-data.csv | wc -l >> results/summary.md
+
+sed -i '' '1i\
+quote> # Reviewed for the field season report
+quote> ' scripts/03-plot.py
+
+diff --git a/results/summary.md b/results/summary.md
+index 295821a..817eec6 100644
+--- a/results/summary.md
++++ b/results/summary.md
+@@ -1 +1,2 @@
+ Analysis of the first field season.
++      41
+diff --git a/scripts/03-plot.py b/scripts/03-plot.py
+index 70ea841..c5af7da 100644
+--- a/scripts/03-plot.py
++++ b/scripts/03-plot.py
+@@ -1,3 +1,4 @@
++# Reviewed for the field season report
+:...skipping...
+diff --git a/results/summary.md b/results/summary.md
+index 295821a..817eec6 100644
+--- a/results/summary.md
++++ b/results/summary.md
+@@ -1 +1,2 @@
+ Analysis of the first field season.
++      41
+diff --git a/scripts/03-plot.py b/scripts/03-plot.py
+index 70ea841..c5af7da 100644
+--- a/scripts/03-plot.py
++++ b/scripts/03-plot.py
+@@ -1,3 +1,4 @@
++# Reviewed for the field season report
+ # Plot the daily temperature readings
+:...skipping...
+diff --git a/results/summary.md b/results/summary.md
+index 295821a..817eec6 100644
+--- a/results/summary.md
++++ b/results/summary.md
+@@ -1 +1,2 @@
+ Analysis of the first field season.
++      41
+diff --git a/scripts/03-plot.py b/scripts/03-plot.py
+index 70ea841..c5af7da 100644
+--- a/scripts/03-plot.py
++++ b/scripts/03-plot.py
+@@ -1,3 +1,4 @@
++# Reviewed for the field season report
+ # Plot the daily temperature readings
+ # Prints a simple text chart, one bar per reading.
+:...skipping...
+diff --git a/results/summary.md b/results/summary.md
+index 295821a..817eec6 100644
+--- a/results/summary.md
++++ b/results/summary.md
+@@ -1 +1,2 @@
+ Analysis of the first field season.
++      41
+diff --git a/scripts/03-plot.py b/scripts/03-plot.py
+index 70ea841..c5af7da 100644
+--- a/scripts/03-plot.py
++++ b/scripts/03-plot.py
+@@ -1,3 +1,4 @@
++# Reviewed for the field season report
+ # Plot the daily temperature readings
+ # Prints a simple text chart, one bar per reading.
+ 
+:...skipping...
+diff --git a/results/summary.md b/results/summary.md
+index 295821a..817eec6 100644
+--- a/results/summary.md
++++ b/results/summary.md
+@@ -1 +1,2 @@
+ Analysis of the first field season.
++      41
+diff --git a/scripts/03-plot.py b/scripts/03-plot.py
+index 70ea841..c5af7da 100644
+--- a/scripts/03-plot.py
++++ b/scripts/03-plot.py
+@@ -1,3 +1,4 @@
++# Reviewed for the field season report
+ # Plot the daily temperature readings
+ # Prints a simple text chart, one bar per reading.
+ 
+~
+
+The + means that this line is the new line that has been updated.
+
+git add .
+git commit -m "Update analyss"
+
+git commit --amend -m "Update analysis"
+
+git switch 'main'
+git merge station-upgrade
+def3979 (HEAD -> main, station-upgrade) Update analysis
+34f05c2 Add gitignore
+c1194e0 Update station files
+adbdb1d Add results directory
+a22b29e (origin/main, origin/HEAD) docs(readme): note committing commands.txt before task 18 and force push for bonus 2
+b645f85 feat: quiz 01 starter files
