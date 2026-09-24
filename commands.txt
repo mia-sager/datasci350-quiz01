@@ -134,3 +134,6 @@ c1194e0 Update station files
 adbdb1d Add results directory
 a22b29e (origin/main, origin/HEAD) docs(readme): note committing commands.txt before task 18 and force push for bonus 2
 b645f85 feat: quiz 01 starter files
+
+git add .
+git commit -m "Add command log"
